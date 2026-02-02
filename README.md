@@ -1,21 +1,35 @@
 <div align="center">
 
-# GET SHIT DONE
+```
+  ╔═══════════════════════════════════╗
+  ║  GSD  •  Community Fork           ║
+  ╚═══════════════════════════════════╝
+```
 
-**A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code, OpenCode, and Gemini CLI.**
+For the official version, see [glittercowboy/get-shit-done](https://github.com/glittercowboy/get-shit-done).
+
+---
+
+**A light-weight and powerful meta-prompting, context engineering and spec-driven development system for Claude Code and OpenCode.**
 
 **Solves context rot — the quality degradation that happens as Claude fills its context window.**
 
-[![npm version](https://img.shields.io/npm/v/get-shit-done-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/get-shit-done-cc)
-[![npm downloads](https://img.shields.io/npm/dm/get-shit-done-cc?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/get-shit-done-cc)
+[![GitHub](https://img.shields.io/badge/Community_Fork-superresistant-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/superresistant/get-shit-done)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/5JJgD5svVS)
-[![GitHub stars](https://img.shields.io/github/stars/glittercowboy/get-shit-done?style=for-the-badge&logo=github&color=181717)](https://github.com/glittercowboy/get-shit-done)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 
 <br>
 
+### Install Community Fork
+
 ```bash
-npx get-shit-done-cc
+npx github:superresistant/get-shit-done
+```
+
+### Install Specific Version
+
+```bash
+npx github:superresistant/get-shit-done#v1.0
 ```
 
 **Works on Mac, Windows, and Linux.**
@@ -39,6 +53,29 @@ npx get-shit-done-cc
 [Why I Built This](#why-i-built-this) · [How It Works](#how-it-works) · [Commands](#commands) · [Why It Works](#why-it-works)
 
 </div>
+
+---
+
+<!-- GSD-SYNC-START -->
+## What's Different (Fork)
+
+This fork includes community PRs merged from upstream:
+
+| PR | Title | Author |
+|----|-------|--------|
+| [#296](https://github.com/glittercowboy/get-shit-done/pull/296) | fix: scale context bar in statusline to show 100% | @kaladivo |
+| [#287](https://github.com/glittercowboy/get-shit-done/pull/287) | fix(agents): replace context7 wildcard with explicit names | @dkmaker |
+| [#268](https://github.com/glittercowboy/get-shit-done/pull/268) | fix: add fallback to source hooks when dist/ missing | @heltonteixeira |
+| [#186](https://github.com/glittercowboy/get-shit-done/pull/186) | refactor(agents): use @-references for codebase-mapper | @jjshanks |
+| [#289](https://github.com/glittercowboy/get-shit-done/pull/289) | fix: add character preservation rules | @szymontex |
+| [#288](https://github.com/glittercowboy/get-shit-done/pull/288) | fix(install): auto-migrate renamed statusline | @superresistant |
+| [#286](https://github.com/glittercowboy/get-shit-done/pull/286) | feat(install): respect attribution.commit | @superresistant |
+| [#277](https://github.com/glittercowboy/get-shit-done/pull/277) | feat(templates): add exports field guidance | @davesienkowski |
+| [#278](https://github.com/glittercowboy/get-shit-done/pull/278) | feat(verifier): add provides/consumes verification | @davesienkowski |
+| [#275](https://github.com/glittercowboy/get-shit-done/pull/275) | feat(mapper): add Feature Map section | @davesienkowski |
+
+*Last synced: 2026-01-26*
+<!-- GSD-SYNC-END -->
 
 ---
 
@@ -73,21 +110,27 @@ People who want to describe what they want and have it built correctly — witho
 ## Getting Started
 
 ```bash
-npx get-shit-done-cc
+npx github:superresistant/get-shit-done
 ```
 
 The installer prompts you to choose:
-1. **Runtime** — Claude Code, OpenCode, Gemini, or all
+1. **Runtime** — Claude Code, OpenCode, or both
 2. **Location** — Global (all projects) or local (current project only)
 
-Verify with `/gsd:help` inside your chosen runtime.
+Verify with `/gsd:help` inside your Claude Code or OpenCode interface.
 
 ### Staying Updated
 
-GSD evolves fast. Update periodically:
+Update to the latest community fork:
 
 ```bash
-npx get-shit-done-cc@latest
+npx github:superresistant/get-shit-done
+```
+
+Or pin to a specific release:
+
+```bash
+npx github:superresistant/get-shit-done#v1.0
 ```
 
 <details>
@@ -95,21 +138,18 @@ npx get-shit-done-cc@latest
 
 ```bash
 # Claude Code
-npx get-shit-done-cc --claude --global   # Install to ~/.claude/
-npx get-shit-done-cc --claude --local    # Install to ./.claude/
+npx github:superresistant/get-shit-done --claude --global   # Install to ~/.claude/
+npx github:superresistant/get-shit-done --claude --local    # Install to ./.claude/
 
 # OpenCode (open source, free models)
-npx get-shit-done-cc --opencode --global # Install to ~/.config/opencode/
+npx github:superresistant/get-shit-done --opencode --global # Install to ~/.opencode/
 
-# Gemini CLI
-npx get-shit-done-cc --gemini --global   # Install to ~/.gemini/
-
-# All runtimes
-npx get-shit-done-cc --all --global      # Install to all directories
+# Both runtimes
+npx github:superresistant/get-shit-done --both --global     # Install to both directories
 ```
 
 Use `--global` (`-g`) or `--local` (`-l`) to skip the location prompt.
-Use `--claude`, `--opencode`, `--gemini`, or `--all` to skip the runtime prompt.
+Use `--claude`, `--opencode`, or `--both` to skip the runtime prompt.
 
 </details>
 
@@ -119,7 +159,7 @@ Use `--claude`, `--opencode`, `--gemini`, or `--all` to skip the runtime prompt.
 Clone the repository and run the installer locally:
 
 ```bash
-git clone https://github.com/glittercowboy/get-shit-done.git
+git clone https://github.com/superresistant/get-shit-done.git
 cd get-shit-done
 node bin/install.js --claude --local
 ```
@@ -526,23 +566,6 @@ Use `/gsd:settings` to toggle these, or override per-invocation:
 | `parallelization.enabled` | `true` | Run independent plans simultaneously |
 | `planning.commit_docs` | `true` | Track `.planning/` in git |
 
-### Git Branching
-
-Control how GSD handles branches during execution.
-
-| Setting | Options | Default | What it does |
-|---------|---------|---------|--------------|
-| `git.branching_strategy` | `none`, `phase`, `milestone` | `none` | Branch creation strategy |
-| `git.phase_branch_template` | string | `gsd/phase-{phase}-{slug}` | Template for phase branches |
-| `git.milestone_branch_template` | string | `gsd/{milestone}-{slug}` | Template for milestone branches |
-
-**Strategies:**
-- **`none`** — Commits to current branch (default GSD behavior)
-- **`phase`** — Creates a branch per phase, merges at phase completion
-- **`milestone`** — Creates one branch for entire milestone, merges at completion
-
-At milestone completion, GSD offers squash merge (recommended) or merge with history.
-
 ---
 
 ## Troubleshooting
@@ -553,18 +576,18 @@ At milestone completion, GSD offers squash merge (recommended) or merge with his
 
 **Commands not working as expected?**
 - Run `/gsd:help` to verify installation
-- Re-run `npx get-shit-done-cc` to reinstall
+- Re-run `npx github:superresistant/get-shit-done` to reinstall
 
 **Updating to the latest version?**
 ```bash
-npx get-shit-done-cc@latest
+npx github:superresistant/get-shit-done
 ```
 
 **Using Docker or containerized environments?**
 
 If file reads fail with tilde paths (`~/.claude/...`), set `CLAUDE_CONFIG_DIR` before installing:
 ```bash
-CLAUDE_CONFIG_DIR=/home/youruser/.claude npx get-shit-done-cc --global
+CLAUDE_CONFIG_DIR=/home/youruser/.claude npx github:superresistant/get-shit-done --global
 ```
 This ensures absolute paths are used instead of `~` which may not expand correctly in containers.
 
@@ -574,12 +597,12 @@ To remove GSD completely:
 
 ```bash
 # Global installs
-npx get-shit-done-cc --claude --global --uninstall
-npx get-shit-done-cc --opencode --global --uninstall
+npx github:superresistant/get-shit-done --claude --global --uninstall
+npx github:superresistant/get-shit-done --opencode --global --uninstall
 
 # Local installs (current project)
-npx get-shit-done-cc --claude --local --uninstall
-npx get-shit-done-cc --opencode --local --uninstall
+npx github:superresistant/get-shit-done --claude --local --uninstall
+npx github:superresistant/get-shit-done --opencode --local --uninstall
 ```
 
 This removes all GSD commands, agents, hooks, and settings while preserving your other configurations.
@@ -588,26 +611,10 @@ This removes all GSD commands, agents, hooks, and settings while preserving your
 
 ## Community Ports
 
-OpenCode and Gemini CLI are now natively supported via `npx get-shit-done-cc`.
-
-These community ports pioneered multi-runtime support:
-
 | Project | Platform | Description |
 |---------|----------|-------------|
-| [gsd-opencode](https://github.com/rokicool/gsd-opencode) | OpenCode | Original OpenCode adaptation |
-| [gsd-gemini](https://github.com/uberfuzzy/gsd-gemini) | Gemini CLI | Original Gemini adaptation |
-
----
-
-## Star History
-
-<a href="https://star-history.com/#glittercowboy/get-shit-done&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=glittercowboy/get-shit-done&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=glittercowboy/get-shit-done&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=glittercowboy/get-shit-done&type=Date" />
- </picture>
-</a>
+| [gsd-opencode](https://github.com/rokicool/gsd-opencode) | OpenCode | GSD adapted for OpenCode CLI |
+| [gsd-gemini](https://github.com/uberfuzzy/gsd-gemini) | Gemini CLI | GSD adapted for Google's Gemini CLI |
 
 ---
 
