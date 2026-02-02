@@ -195,6 +195,34 @@ function writeSettings(settingsPath, settings) {
 }
 
 /**
+ * Get commit attribution: null = remove, undefined = keep default, string = custom
+ */
+function getCommitAttribution(runtime) {
+  if (runtime === 'opencode') {
+    const config = readSettings(path.join(getGlobalDir('opencode', null), 'opencode.json'));
+    return config.disable_ai_attribution === true ? null : undefined;
+  }
+
+  const settings = readSettings(path.join(getGlobalDir('claude', explicitConfigDir), 'settings.json'));
+  if (!settings.attribution || settings.attribution.commit === undefined) return undefined;
+  if (settings.attribution.commit === '') return null;
+  return settings.attribution.commit;
+}
+
+/**
+ * Process Co-Authored-By lines based on attribution setting
+ */
+function processAttribution(content, attribution) {
+  if (attribution === null) {
+    return content.replace(/(\r?\n){2}Co-Authored-By:.*$/gim, '');
+  }
+  if (attribution === undefined) {
+    return content;
+  }
+  return content.replace(/Co-Authored-By:.*$/gim, `Co-Authored-By: ${attribution}`);
+}
+
+/**
  * Convert Claude Code frontmatter to opencode format
  * - Converts 'allowed-tools:' array to 'permission:' object
  * @param {string} content - Markdown file content with YAML frontmatter
@@ -560,6 +588,8 @@ function copyFlattenedCommands(srcDir, destDir, prefix, pathPrefix, runtime) {
       const opencodeDirRegex = /~\/\.opencode\//g;
       content = content.replace(claudeDirRegex, pathPrefix);
       content = content.replace(opencodeDirRegex, pathPrefix);
+      // Process attribution based on user settings
+      content = processAttribution(content, getCommitAttribution(runtime));
       content = convertClaudeToOpencodeFrontmatter(content);
 
       fs.writeFileSync(destPath, content);
@@ -598,7 +628,9 @@ function copyWithPathReplacement(srcDir, destDir, pathPrefix, runtime) {
       let content = fs.readFileSync(srcPath, 'utf8');
       const claudeDirRegex = /~\/\.claude\//g;
       content = content.replace(claudeDirRegex, pathPrefix);
-      
+      // Process attribution based on user settings
+      content = processAttribution(content, getCommitAttribution(runtime));
+
       // Convert frontmatter for opencode compatibility
       if (isOpencode) {
         content = convertClaudeToOpencodeFrontmatter(content);
@@ -1081,6 +1113,8 @@ function install(isGlobal, runtime = 'claude') {
         // Always replace ~/.claude/ as it is the source of truth in the repo
         const dirRegex = /~\/\.claude\//g;
         content = content.replace(dirRegex, pathPrefix);
+        // Process attribution based on user settings
+        content = processAttribution(content, getCommitAttribution(runtime));
         // Convert frontmatter for runtime compatibility
         if (isOpencode) {
           content = convertClaudeToOpencodeFrontmatter(content);
@@ -1239,6 +1273,14 @@ function handleStatusline(settings, isInteractive, callback) {
     return;
   }
 
+  // Auto-migrate renamed GSD statusline (hooks/statusline.js -> hooks/gsd-statusline.js)
+  const existingCmd = settings.statusLine.command || '';
+  if (existingCmd.includes('hooks/statusline.js') || existingCmd.includes('hooks\\statusline.js')) {
+    console.log(`  ${green}✓${reset} Migrating statusline.js → gsd-statusline.js`);
+    callback(true);
+    return;
+  }
+
   if (forceStatusline) {
     callback(true);
     return;
@@ -1251,7 +1293,7 @@ function handleStatusline(settings, isInteractive, callback) {
     return;
   }
 
-  const existingCmd = settings.statusLine.command || settings.statusLine.url || '(custom)';
+  const displayCmd = settings.statusLine.command || settings.statusLine.url || '(custom)';
 
   const rl = readline.createInterface({
     input: process.stdin,
@@ -1261,7 +1303,7 @@ function handleStatusline(settings, isInteractive, callback) {
   console.log(`
   ${yellow}⚠${reset} Existing statusline detected\n
   Your current statusline:
-    ${dim}command: ${existingCmd}${reset}
+    ${dim}command: ${displayCmd}${reset}
 
   GSD includes a statusline showing:
     • Model name
