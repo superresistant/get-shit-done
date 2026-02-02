@@ -59,22 +59,24 @@ npx github:superresistant/get-shit-done#v1.0
 <!-- GSD-SYNC-START -->
 ## What's Different (Fork)
 
-This fork includes community PRs merged from upstream:
+**Based on v1.11.1** with community PRs + fork-exclusive features:
+
+### Community PRs (merged from upstream)
 
 | PR | Title | Author |
 |----|-------|--------|
-| [#296](https://github.com/glittercowboy/get-shit-done/pull/296) | fix: scale context bar in statusline to show 100% | @kaladivo |
 | [#287](https://github.com/glittercowboy/get-shit-done/pull/287) | fix(agents): replace context7 wildcard with explicit names | @dkmaker |
-| [#268](https://github.com/glittercowboy/get-shit-done/pull/268) | fix: add fallback to source hooks when dist/ missing | @heltonteixeira |
 | [#186](https://github.com/glittercowboy/get-shit-done/pull/186) | refactor(agents): use @-references for codebase-mapper | @jjshanks |
 | [#289](https://github.com/glittercowboy/get-shit-done/pull/289) | fix: add character preservation rules | @szymontex |
-| [#288](https://github.com/glittercowboy/get-shit-done/pull/288) | fix(install): auto-migrate renamed statusline | @superresistant |
-| [#286](https://github.com/glittercowboy/get-shit-done/pull/286) | feat(install): respect attribution.commit | @superresistant |
 | [#277](https://github.com/glittercowboy/get-shit-done/pull/277) | feat(templates): add exports field guidance | @davesienkowski |
 | [#278](https://github.com/glittercowboy/get-shit-done/pull/278) | feat(verifier): add provides/consumes verification | @davesienkowski |
-| [#275](https://github.com/glittercowboy/get-shit-done/pull/275) | feat(mapper): add Feature Map section | @davesienkowski |
 
-*Last synced: 2026-01-26*
+### Fork-Exclusive Features
+
+- **attribution.commit support** — Respects `settings.attribution.commit` to customize or remove Co-Authored-By lines
+- **statusline auto-migration** — Automatically migrates `hooks/statusline.js` → `hooks/gsd-statusline.js`
+
+*Last synced: 2026-02-02 • Base: v1.11.1*
 <!-- GSD-SYNC-END -->
 
 ---

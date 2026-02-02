@@ -1,0 +1,13 @@
+{
+  "upstream": "glittercowboy/get-shit-done",
+  "merged_prs": [
+    {"number": 287, "title": "fix(agents): replace context7 wildcard with explicit tool names", "author": "dkmaker"},
+    {"number": 186, "title": "refactor(agents): use @-references for codebase-mapper templates", "author": "jjshanks"},
+    {"number": 289, "title": "fix: add character preservation rules and clarify ASCII terminology", "author": "szymontex"},
+    {"number": 277, "title": "feat(templates): add exports field guidance with verifiable identifier examples", "author": "davesienkowski"},
+    {"number": 278, "title": "feat(verifier): add provides/consumes verification and enhanced key_links checking", "author": "davesienkowski"}
+  ],
+  "last_sync": "2026-02-02T11:50:00+01:00",
+  "base_version": "1.11.1",
+  "fork_features": ["attribution.commit support", "statusline auto-migration"]
+}
